@@ -1,0 +1,25 @@
+server {
+    listen 80;
+    server_name nginx-log-analyzer.loc;
+    root /var/www/nginx-log-analyzer/web;
+
+    index index.php;
+
+    access_log /var/log/nginx/log-analyzer-access.log;
+    error_log  /var/log/nginx/log-analyzer-error.log;
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass  unix:/run/php/php8.1-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include       fastcgi_params;
+    }
+
+    location ~ /\.(ht|git) {
+        deny all;
+    }
+}

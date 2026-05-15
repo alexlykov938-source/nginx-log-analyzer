@@ -1,0 +1,19 @@
+# Composer
+/vendor/
+composer.lock
+
+# Yii runtime / generated
+/runtime/
+/web/assets/
+
+# Environment / sensitive
+config/db.php
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
